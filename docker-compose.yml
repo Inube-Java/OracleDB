@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+    oracle-db:
+        image: gvenzl/oracle-xe:21.3.0
+        container_name: oracle-db
+        ports:
+            - "1521:1521" # Puerto SQL*Net
+            - "5500:5500" # Oracle EM Express (si está habilitado)
+        environment:
+            ORACLE_PASSWORD: oracle # Password para SYS, SYSTEM, PDBADMIN
+            APP_USER: appuser # Usuario de aplicación
+            APP_USER_PASSWORD: apppass
+        volumes:
+            - oracle-data:/opt/oracle/oradata # Persistencia de datos
+
+volumes:
+    oracle-data:
